@@ -1,0 +1,155 @@
+﻿<Window x:Class="Geo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Geo"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Background="White"  
+        ResizeMode="CanMinimize"
+        Title="X Demo" Height="485" Width="600" 
+		WindowStartupLocation="CenterScreen"
+        Icon="images/Logo.png"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--标题栏-->
+        <Border Grid.Row="0" BorderThickness="0,0,0,2">
+            <Grid MouseMove="MainTitle_MouseMove" Background="Tan">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Background="Tan" Width="50" Height="50" Click="Button_Click_2" BorderThickness="0">
+                    <Image gif:ImageBehavior.AnimatedSource="./images/earthIcon.gif" Stretch="Fill" Margin="3"/>
+                </Button>
+                
+                <TextBlock Grid.Column="1" Grid.Row="0"
+                           Foreground="Navy" Text="地址—>经纬度" FontWeight="Bold" 
+                           FontFamily="/DM-Studio;component/Fonts/#AR DESTINE" FontSize="28"
+                           HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <TextBlock Grid.Column="1" Grid.Row="0"
+                           Foreground="Navy" Text="（from team 10）" FontWeight="Bold" 
+                           FontFamily="/DM-Studio;component/Fonts/#AR DESTINE" FontSize="15"
+                           HorizontalAlignment="Left" VerticalAlignment="Center" Margin="190,0,0,0"/>
+
+                <Button Name="BtnMin" Grid.Column="3" Grid.Row="0" Background="Tan" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        Width="60" Height="60" Click="BtnMin_Click" BorderThickness="0">
+                    <Image Width="45" Height="45" Source="/images/Min.png" Margin="0"/>
+                </Button>
+                <Button Name="BtnClose" Grid.Column="4" Grid.Row="0" Background="Tan" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        Width="60" Height="60" BorderThickness="0" Click="BtnClose_Click">
+                    <Image Width="45" Height="45" Source="/images/Close.png" Margin="0"/>
+                </Button>
+            </Grid>
+        </Border>
+        
+        <Grid Grid.Row="1" Background="LightGray">
+            <Grid Grid.Column="0" Grid.Row="0" Margin="5">
+
+                <Border CornerRadius="10" Background="White">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="0" Color="#FFC8C8C8" Opacity="0.3" BlurRadius="20"/>
+                    </Border.Effect>
+                    <Border Background="White"  CornerRadius="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Column="0" Grid.Row="0" Margin="0">
+                                <TextBlock Text="地址:" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Margin="20,0,0,0"/>
+                                <TextBox Name="Address" Text="北航" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="100,0,0,0" ToolTip="需要转换成经纬度的地址、单位、学校等"
+                                         Background="FloralWhite" Height="50" Width="470" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                            <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                            </Grid>
+
+                            <Grid Grid.Column="0" Grid.Row="1" Margin="0">
+                                <TextBlock Text="经纬度:" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Margin="10,0,0,0"/>
+                                <TextBox Name="Location" Text="" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="100,0,0,0" ToolTip="地址转换出的经纬度"
+                                         Background="FloralWhite" Height="50" Width="470" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                            <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                            </Grid>
+
+                            <Grid Grid.Column="0" Grid.Row="2" Margin="0">
+                              
+                                <TextBlock Text="地址列:" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Margin="10,0,0,0"/>
+                                <TextBox Name="originalColumn" Text="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="105,0,0,0"  ToolTip="选择Excel文件地址所在的列"
+                                         Background="FloralWhite" Height="50" Width="160" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                            <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                                <TextBlock Text="经纬度列:" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Margin="290,0,0,0"/>
+                                <TextBox Name="targetColumn" Text="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="410,0,0,0" ToolTip="选择Excel文件要写入经纬度的列"
+                                         Background="FloralWhite" Height="50" Width="160" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                            <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+                            </Grid>
+
+                            <Grid Grid.Column="0" Grid.Row="3" Margin="0">
+                                <TextBlock Text="共转换" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Margin="10,0,0,0"/>
+                                <TextBox Name="rows" Text="1000" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="100,0,0,0" ToolTip="从第二行开始转换一共需要转换的行数"
+                                         Background="FloralWhite" Height="50" Width="445" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="8"/>
+                                            <Setter Property="BorderBrush" Value="#c1d0dc"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <TextBlock Text="行" Grid.Row="1" Foreground="#FFAAAABE" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="25" Margin="0,0,10,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="0" Grid.Row="4" Margin="0">
+                                
+                                <Button Command="{Binding DisposeBtnCommand}" Style="{StaticResource DMBrushButton}" Width="120" Height="50" 
+                                        Content="处理" FontSize="20" HorizontalAlignment="Center" Margin="0,0,230,15" ToolTip="开始对数据进行处理" Click="Button_Click"/>
+
+                                <Button Command="{Binding DisposeBtnCommand}" Style="{StaticResource DMBrushButton}" Width="120" Height="50" 
+                                        Content="批量处理" FontSize="20" HorizontalAlignment="Center" Margin="230,0,0,15" ToolTip="开始对数据进行批量处理" Click="Button_Click_1"/>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </Border>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
