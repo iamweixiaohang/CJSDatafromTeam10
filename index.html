@@ -886,6 +886,53 @@
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
+			
+			
+			
+			var mapContainer2 = document.getElementById('map2');
+			
+			var mapContainer = document.getElementById('map');
+			var linContainer = document.getElementById('ageLine');
+			var pieContainer = document.getElementById('agePie');
+			
+			//用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+			var resizeWorldMapContainer = function () {
+				mapContainer2.style.height = window.innerHeight+'px';
+			
+				mapContainer.style.height = window.innerHeight+'px';
+				linContainer.style.height = window.innerHeight+'px';
+				pieContainer.style.height = window.innerHeight+'px';
+			};
+			//设置容器高宽
+			resizeWorldMapContainer();
+			
+			// 年龄分布
+			var myChartMap2 = echarts.init(mapContainer2);
+			
+			var myChartMap = echarts.init(mapContainer);
+			var myChartAgeLine = echarts.init(linContainer);
+			var myChartAgePie = echarts.init(pieContainer);
+			
+			// 获取百度地图实例，使用百度地图自带的控件
+			//var bmap = myChart.getModel().getComponent('bmap').getBMap();
+			//bmap.addControl(new BMap.MapTypeControl());
+			
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
 			//饼图数据准备
 			var a1 = '≤40岁';
 			var a2 = '41~45岁';
@@ -1037,50 +1084,7 @@
 			};
 			
 			
-			
-			
-			
-			
-			
-			
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-			
-			
-			
-			
-			var mapContainer2 = document.getElementById('map2');
-			
-			var mapContainer = document.getElementById('map');
-			var linContainer = document.getElementById('ageLine');
-			var pieContainer = document.getElementById('agePie');
-			
-			//用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
-			var resizeWorldMapContainer = function () {
-				mapContainer2.style.height = window.innerHeight+'px';
-			
-				mapContainer.style.height = window.innerHeight+'px';
-				linContainer.style.height = window.innerHeight+'px';
-				pieContainer.style.height = window.innerHeight+'px';
-			};
-			//设置容器高宽
-			resizeWorldMapContainer();
-			
-			// 年龄分布
-			var myChartMap2 = echarts.init(mapContainer2);
-			
-			var myChartMap = echarts.init(mapContainer);
-			var myChartAgeLine = echarts.init(linContainer);
-			var myChartAgePie = echarts.init(pieContainer);
-			
-			// 获取百度地图实例，使用百度地图自带的控件
-			//var bmap = myChart.getModel().getComponent('bmap').getBMap();
-			//bmap.addControl(new BMap.MapTypeControl());
-			
-			
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-			myChartAgeLine.setOption(optionAgeLine);
+			//myChartAgeLine.setOption(optionAgeLine);
 			myChartAgePie.setOption(optionAgePie);
 			
         </script>
