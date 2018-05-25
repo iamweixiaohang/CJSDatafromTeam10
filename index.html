@@ -638,12 +638,19 @@
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			// 地域分布
-			//myChartMapOriginGeo.setOption(optionMapOriginGeo);
-			//myChartMapUnitGeo.setOption(optionMapUnitGeo);
+			myChartMapOriginGeo.setOption(optionMapOriginGeo);
+			myChartMapUnitGeo.setOption(optionMapUnitGeo);
 			
 			// 年龄分布
 			myChartAgeLine.setOption(optionAgeLine);
 			myChartAgePie.setOption(optionAgePie);
+			
+			// 获取百度地图实例，使用百度地图自带的控件
+			var bmapOriginGeo = myChartMapOriginGeo.getModel().getComponent('bmap').getBMap();
+			bmapOriginGeo.addControl(new BMap.MapTypeControl());
+			
+			var bmapUnitGeo = myChartMapUnitGeo.getModel().getComponent('bmap').getBMap();
+			bmapUnitGeo.addControl(new BMap.MapTypeControl());
 			
         </script>
     </body>
