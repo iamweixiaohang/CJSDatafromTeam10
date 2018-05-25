@@ -65,14 +65,14 @@
             <div id="mapUnit" class="right2" style=" height:800px;"></div>
         </div> 	
 		
-		<div style="text-align:center; vertical-align:middel width:100% height:32px;">第 1 页</div>
+		<div style="text-align:center;vertical-align:middel;width:100%,height:50px;font-size:40px">第 1 页</div>
 		
 		<div class="container">
             <div class="left" id="ageLine" style=" height:800px;"></div>
             <div class="right" id="agePie" style=" height:800px;"></div>
         </div> 
 		
-		<div style="text-align:center; vertical-align:middel width:100% height:32px;">第 2 页</div>
+		<div style="text-align:center;vertical-align:middel;width:100%,height:50px;font-size:40px">第 2 页</div>
 
         <script>
 		
@@ -87,10 +87,10 @@
 			
 			// 用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 			var resizeWorldMapContainer = function () {
-				mapUnitContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
-				mapOriginContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
-				linContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
-				pieContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
+				mapUnitContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
+				mapOriginContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
+				linContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
+				pieContainer.style.height = (parseInt(window.innerHeight) - 50).toString()+'px';
 			};
 			// 设置容器高宽
 			resizeWorldMapContainer();
