@@ -65,10 +65,14 @@
             <div id="mapUnit" class="right2" style=" height:800px;"></div>
         </div> 	
 		
+		<div style="text-align:center; vertical-align:middel width:100% height:32px;">第 1 页</div>
+		
 		<div class="container">
             <div class="left" id="ageLine" style=" height:800px;"></div>
             <div class="right" id="agePie" style=" height:800px;"></div>
         </div> 
+		
+		<div style="text-align:center; vertical-align:middel width:100% height:32px;">第 2 页</div>
 
         <script>
 		
@@ -83,10 +87,10 @@
 			
 			// 用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 			var resizeWorldMapContainer = function () {
-				mapUnitContainer.style.height = window.innerHeight+'px';
-				mapOriginContainer.style.height = window.innerHeight+'px';
-				linContainer.style.height = window.innerHeight+'px';
-				pieContainer.style.height = window.innerHeight+'px';
+				mapUnitContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
+				mapOriginContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
+				linContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
+				pieContainer.style.height = (parseInt(window.innerHeight) - 32).toString()+'px';
 			};
 			// 设置容器高宽
 			resizeWorldMapContainer();
@@ -107,7 +111,7 @@
 			optionMapOriginGeo = {
 				title: {
 					text: '部分长江学者籍贯地区分布图',
-					subtext: 'Data from Team 10(Github Link)',
+					subtext: 'Data from Team 10（Github Link）',
 					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
 					left: 'center',
 				},
@@ -274,7 +278,7 @@
 			optionMapUnitGeo = {
 				title: {
 					text: '部分长江学者所在地区分布图',
-					subtext: 'Data from Team 10(Github Link)',
+					subtext: 'Data from Team 10（Github Link）',
 					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
 					left: 'center',
 				},
@@ -449,7 +453,7 @@
 				color: colors,
 				title: {
 					text: '部分长江学者年龄与获奖年龄分布图',
-					subtext: 'Data from Team 10(Github Link)',
+					subtext: 'Data from Team 10（Github Link）',
 					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
 					left: 'center'
 				},
@@ -527,7 +531,7 @@
 			optionAgePie = {
 				title : {
 					text: '部分长江学者年龄与获奖年龄比例图',
-					subtext: 'Data from Team 10(Github Link)',
+					subtext: 'Data from Team 10（Github Link）',
 					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
 					x: 'center'
 				},
