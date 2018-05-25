@@ -886,6 +886,169 @@
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
+			//饼图数据准备
+			var a1 = '≤40岁';
+			var a2 = '41~45岁';
+			var a3 = '46~50岁';
+			var a4 = '51~55岁';
+			var a5 = '56~60岁';
+			var a6 = '61~65岁';
+			var a7 = '66~70岁';
+			var a8 = '≥71岁';
+			
+			var a11 = 9;
+			var a12 = 31;
+			var a13 = 116;
+			var a14 = 231;
+			var a15 = 143;
+			var a16 = 76;
+			var a17 = 6;
+			var a18 = 7;
+			
+			var ha1 = '≤30岁';
+			var ha2 = '31~35岁';
+			var ha3 = '36~40岁';
+			var ha4 = '41~45岁';
+			var ha5 = '46~50岁';
+			var ha6 = '51~55岁';
+			var ha7 = '56~60岁';
+			var ha8 = '≥61岁';
+			
+			var ha11 = 8;
+			var ha12 = 30;
+			var ha13 = 108;
+			var ha14 = 251;
+			var ha15 = 146;
+			var ha16 = 52;
+			var ha17 = 18;
+			var ha18 = 6;
+			
+			//饼图
+			optionAgePie = {
+				title : {
+					text: '部分长江学者年龄与获奖年龄比例图',
+					subtext: 'Data from Team 10',
+					sublink: 'http://www.baidu.com',
+					x: 'center'
+				},
+				tooltip : {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				calculable : true,
+				series : [{
+					name:'年龄',
+					type:'pie',
+					radius : [20, 110],
+					center : ['50%', '30%'],
+					roseType : 'radius',
+					label: {
+						normal: {
+							formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								a: {
+									color: '#999',
+									lineHeight: 18,
+									align: 'center'
+								},
+								hr: {
+									borderColor: '#aaa',
+									width: '100%',
+									borderWidth: 0.5,
+									height: 0
+								},
+								b: {
+									fontSize: 10,
+									lineHeight: 26
+								},
+								per: {
+									color: '#eee',
+									backgroundColor: '#334455',
+									padding: [2, 4],
+									borderRadius: 2
+								}
+							}
+						}
+					},
+					data: [
+						{value:a11, name:a1},
+						{value:a12, name:a2},
+						{value:a13, name:a3},
+						{value:a14, name:a4},
+						{value:a15, name:a5},
+						{value:a16, name:a6},
+						{value:a17, name:a7},
+						{value:a18, name:a8}
+					]
+				},
+				{
+					name:'获奖年龄',
+					type:'pie',
+					radius : [20, 110],
+					center : ['50%', '80%'],
+					roseType : 'radius',
+					label: {
+						normal: {
+							formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+							backgroundColor: '#eee',
+							borderColor: '#aaa',
+							borderWidth: 1,
+							borderRadius: 4,
+							rich: {
+								a: {
+									color: '#999',
+									lineHeight: 18,
+									align: 'center'
+								},
+								hr: {
+									borderColor: '#aaa',
+									width: '100%',
+									borderWidth: 0.5,
+									height: 0
+								},
+								b: {
+									fontSize: 10,
+									lineHeight: 26
+								},
+								per: {
+									color: '#eee',
+									backgroundColor: '#334455',
+									padding: [2, 4],
+									borderRadius: 2
+								}
+							}
+						}
+					},
+					data: [
+						{value:ha11, name:ha1},
+						{value:ha12, name:ha2},
+						{value:ha13, name:ha3},
+						{value:ha14, name:ha4},
+						{value:ha15, name:ha5},
+						{value:ha16, name:ha6},
+						{value:ha17, name:ha7},
+						{value:ha18, name:ha8}
+					]
+				}]
+			};
+			
+			
+			
+			
+			
+			
+			
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			
+			
+			
+			
 			var mapContainer2 = document.getElementById('map2');
 			
 			var mapContainer = document.getElementById('map');
@@ -913,6 +1076,12 @@
 			// 获取百度地图实例，使用百度地图自带的控件
 			//var bmap = myChart.getModel().getComponent('bmap').getBMap();
 			//bmap.addControl(new BMap.MapTypeControl());
+			
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			
+			myChartAgeLine.setOption(optionAgeLine);
+			myChartAgePie.setOption(optionAgePie);
 			
         </script>
     </body>
