@@ -97,6 +97,8 @@
 			// 设置容器高宽
 			resizeWorldMapContainer();
 			
+			var winWidth = parseInt(window.innerWidth);
+			
 			// 地域分布
 			var myChartMapOriginGeo = echarts.init(mapOriginContainer);
 			var myChartMapUnitGeo = echarts.init(mapUnitContainer);
@@ -143,7 +145,7 @@
 				}],
 				bmap: {
 					center: [104.114129, 37.550339],
-					zoom: 5.5,
+					zoom: winWidth / 1920 * 5.5,//5.5,
 					roam: true,
 					mapStyle: {
 						styleJson: [{
@@ -310,7 +312,7 @@
 				}],
 				bmap: {
 					center: [104.114129, 37.550339],
-					zoom: 5.5,
+					zoom: winWidth / 1920 * 5.5,//5.5,
 					roam: true,
 					mapStyle: {
 						styleJson: [{
@@ -545,7 +547,7 @@
 				series : [{
 					name:'年龄',
 					type:'pie',
-					radius : [20, 110],
+					radius : [20, winWidth / 1920 * 110],
 					center : ['50%', '30%'],
 					roseType : 'radius',
 					label: {
@@ -594,7 +596,7 @@
 				{
 					name:'获奖年龄',
 					type:'pie',
-					radius : [20, 110],
+					radius : [20, winWidth / 1920 * 110],
 					center : ['50%', '80%'],
 					roseType : 'radius',
 					label: {
