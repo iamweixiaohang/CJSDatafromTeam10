@@ -59,17 +59,7 @@
     </head>
 
     <body>
-	
-        <!-- <input type="file" src="第十组_5.8_V1.1.xlsx" multiple = false align="center" accept = "xlsx/*.xlsx" onchange="importf(this)" /> -->
-		
-		<div style="text-align:center; vertical-align:middel;">
-			<input type="file" id="files" multiple = false onchange="importf(this) " />
-		</div>
-		
-        <div id="demo"></div>
-		
-		<!-- <div id="map" style=" height:800px;"></div> -->
-		
+
 		<div class="container2">
             <div id="map2" class="left2" id="ageLine" style=" height:800px;"></div>
             <div id="map" class="right2" id="agePie" style=" height:800px;"></div>
@@ -80,858 +70,87 @@
             <div class="right" id="agePie" style=" height:800px;"></div>
         </div> 
 
-			
-		
         <script>
             
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            var wb;//读取完成的数据
-
-            function importf(obj) {//导入
-                if(!obj.files) {
-                    return;
-                }
-				
-                var f = obj.files[0];
-				
-				//f = 'https://iamweixiaohang.github.io/CJSDatafromTeam10/第十组_5.8_V1.1.xlsx';
-				
-				debugger;
-				console.log(f);
-				
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var data = e.target.result;
-                    
-					wb = XLSX.read(data, {
-						type: 'binary'
-					});
-					
-                    //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
-                    //wb.Sheets[Sheet名]获取第一个Sheet的数据
-                    //document.getElementById("demo").innerHTML= JSON.stringify( XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]) );
-					
-					//读出数据
-					sheets = [];
-					sheets = sheets.concat(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
-					
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					
-					//生日年份
-					var dates = [];
-					var hdates = [];//获奖年龄
-					var min = 2020;
-					var max = 1900;
-					var allcount = 0;
-					for(var i = 0; i < sheets.length; i++){  
-						var data = sheets[i].Birthday;
-						var hdata = sheets[i].HonorTime;
-						
-						if(data != 'NULL') {
-							if (data > max){
-								max = data;
-							}
-							if (data < min){
-								min = data;
-							}
-							
-							dates.push(2018 - parseInt(data));
-							hdates.push(parseInt(hdata) - parseInt(data));
-							allcount++;
-						}							
-					}
-					
-					//
-					var hmin = hdates[0];
-					var len = hdates.length;
-					for (var i = 1; i < len; i++){
-						if (hdates[i] < hmin){
-							hmin = hdates[i];
-						}
-					}
-					
-					//曲线图数据准备
-					var date = [];
-					var sum = [];
-					var hsum = [];
-					var istart = (2018 - parseInt(max));
-					if((2018 - parseInt(max)) > hmin) {
-						istart = hmin;
-					}
-					
-					for(var i = istart; i < (2018 - parseInt(min) + 1); i++){
-						var count = 0;
-						var hcount = 0;
-						
-						for(var j = 0; j < allcount; j++){  
-							if(dates[j]==i){
-								count++;
-							}
-							
-							if(hdates[j]==i){
-								hcount++;
-							}
-						}
-						
-						sum.push(count);
-						hsum.push(hcount);
-						date.push(i);
-					}
-					
-					//曲线图
-					var colors = ['#ff0000', '#0000ff', '#00ff00'];
-					optionAgeLine = {
-						color: colors,
-						title: {
-							text: '部分长江学者年龄与获奖年龄分布图',
-							subtext: 'Data from Team 10',
-							sublink: 'http://www.baidu.com',
-							left: 'center'
-						},
-						tooltip: {
-							trigger: 'axis'
-						},
-						legend: {
-							x : 'center',
-							y : 'bottom',
-							data:['年龄人数' , '获奖年龄人数']
-						},
-						xAxis: {
-							name: '年龄（岁）',
-							type: 'category',
-							data: date
-						},
-						yAxis: {
-							name: '人数（位）',
-							type: 'value'
-						},
-						series: [{
-							name:'年龄人数',
-							data: sum,
-							type: 'line',
-							smooth: true
-						},
-						{
-							name:'获奖年龄人数',
-							data: hsum,
-							type: 'line',
-							smooth: true
-						}]
-					};
-					
-					//饼图数据准备
-					var a1 = '≤40岁';
-					var a2 = '41~45岁';
-					var a3 = '46~50岁';
-					var a4 = '51~55岁';
-					var a5 = '56~60岁';
-					var a6 = '61~65岁';
-					var a7 = '66~70岁';
-					var a8 = '≥71岁';
-					
-					var a11 = 0;
-					var a12 = 0;
-					var a13 = 0;
-					var a14 = 0;
-					var a15 = 0;
-					var a16 = 0;
-					var a17 = 0;
-					var a18 = 0;
-					for(var j = 0; j < allcount; j++){  
-						if(dates[j]<=40){
-							a11++;
-						}
-						else if(dates[j]<=45){
-							a12++;
-						}
-						else if(dates[j]<=50){
-							a13++;
-						}
-						else if(dates[j]<=55){
-							a14++;
-						}
-						else if(dates[j]<=60){
-							a15++;
-						}
-						else if(dates[j]<=65){
-							a16++;
-						}
-						else if(dates[j]<=70){
-							a17++;
-						}
-						else{
-							a18++;
-						}
-					}
-					
-					var ha1 = '≤30岁';
-					var ha2 = '31~35岁';
-					var ha3 = '36~40岁';
-					var ha4 = '41~45岁';
-					var ha5 = '46~50岁';
-					var ha6 = '51~55岁';
-					var ha7 = '56~60岁';
-					var ha8 = '≥61岁';
-					
-					var ha11 = 0;
-					var ha12 = 0;
-					var ha13 = 0;
-					var ha14 = 0;
-					var ha15 = 0;
-					var ha16 = 0;
-					var ha17 = 0;
-					var ha18 = 0;
-					for(var j = 0; j < allcount; j++){  
-						if(hdates[j]<=30){
-							ha11++;
-						}
-						else if(hdates[j]<=35){
-							ha12++;
-						}
-						else if(hdates[j]<=40){
-							ha13++;
-						}
-						else if(hdates[j]<=45){
-							ha14++;
-						}
-						else if(hdates[j]<=50){
-							ha15++;
-						}
-						else if(hdates[j]<=55){
-							ha16++;
-						}
-						else if(hdates[j]<=60){
-							ha17++;
-						}
-						else{
-							ha18++;
-						}
-					}
-					
-					//饼图
-					optionAgePie = {
-						title : {
-							text: '部分长江学者年龄与获奖年龄比例图',
-							subtext: 'Data from Team 10',
-							sublink: 'http://www.baidu.com',
-							x: 'center'
-						},
-						tooltip : {
-							trigger: 'item',
-							formatter: "{a} <br/>{b} : {c} ({d}%)"
-						},
-						calculable : true,
-						series : [{
-							name:'年龄',
-							type:'pie',
-							radius : [20, 110],
-							center : ['50%', '30%'],
-							roseType : 'radius',
-							label: {
-								normal: {
-									formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-									backgroundColor: '#eee',
-									borderColor: '#aaa',
-									borderWidth: 1,
-									borderRadius: 4,
-									rich: {
-										a: {
-											color: '#999',
-											lineHeight: 18,
-											align: 'center'
-										},
-										hr: {
-											borderColor: '#aaa',
-											width: '100%',
-											borderWidth: 0.5,
-											height: 0
-										},
-										b: {
-											fontSize: 10,
-											lineHeight: 26
-										},
-										per: {
-											color: '#eee',
-											backgroundColor: '#334455',
-											padding: [2, 4],
-											borderRadius: 2
-										}
-									}
-								}
-							},
-							data: [
-								{value:a11, name:a1},
-								{value:a12, name:a2},
-								{value:a13, name:a3},
-								{value:a14, name:a4},
-								{value:a15, name:a5},
-								{value:a16, name:a6},
-								{value:a17, name:a7},
-								{value:a18, name:a8}
-							]
-						},
-						{
-							name:'获奖年龄',
-							type:'pie',
-							radius : [20, 110],
-							center : ['50%', '80%'],
-							roseType : 'radius',
-							label: {
-								normal: {
-									formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-									backgroundColor: '#eee',
-									borderColor: '#aaa',
-									borderWidth: 1,
-									borderRadius: 4,
-									rich: {
-										a: {
-											color: '#999',
-											lineHeight: 18,
-											align: 'center'
-										},
-										hr: {
-											borderColor: '#aaa',
-											width: '100%',
-											borderWidth: 0.5,
-											height: 0
-										},
-										b: {
-											fontSize: 10,
-											lineHeight: 26
-										},
-										per: {
-											color: '#eee',
-											backgroundColor: '#334455',
-											padding: [2, 4],
-											borderRadius: 2
-										}
-									}
-								}
-							},
-							data: [
-								{value:ha11, name:ha1},
-								{value:ha12, name:ha2},
-								{value:ha13, name:ha3},
-								{value:ha14, name:ha4},
-								{value:ha15, name:ha5},
-								{value:ha16, name:ha6},
-								{value:ha17, name:ha7},
-								{value:ha18, name:ha8}
-							]
-						}]
-					};
-					
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					
-					var geos = [];
-					geocount = 0;
-					
-					//获取经纬度
-					for(var i = 0; i < sheets.length; i++){  
-						var geo = sheets[i].UnitGeo;
-						
-						if(geo != 'NULL') {
-							geos.push(geo);
-							geocount++;
-						}							
-					}
-					
-					//分类
-					var geosbuffer = [];
-					geosbuffer.push(geos[0]);
-					var count = 1;
-					for(var i = 1; i < geocount; i++)
-					{
-						var b = geos[i];
-						
-						var flag = 0;
-						for(var j = 0;j<count;j++)
-						{
-							if(b==geosbuffer[j])
-							{
-								flag = 1;
-								break;
-							}
-						}
-						
-						if(flag != 1)
-						{
-							geosbuffer.push(b);
-							count++;
-						}
-					}
-					
-					//每类有几个
-					var geo3s = [];
-					for(var i=0;i<count;i++)
-					{
-						var a = 0;
-						var geo3 = [];
-						for(var j=0;j<geocount;j++)
-						{
-							if(geosbuffer[i] == geos[j])
-							{
-								a++;
-							}
-						}
-						
-						var b = geosbuffer[i].split(",");
-						geo3.push(parseFloat(b[0]));
-						geo3.push(parseFloat(b[1]));
-						geo3.push(a);
-						
-						geo3s.push(geo3);
-					}
-					
-					optionMap = {
-						title: {
-							text: '部分长江学者所在地区分布图',
-							subtext: 'Data from Team 10',
-							sublink: 'http://www.baidu.com',
-							left: 'center',
-						},
-						tooltip : {
-							trigger: 'item',
-							formatter: function (params) {
-								
-								var a = params.value.toString().split(",");
-								
-								return ('经纬度：(' + a[0] +'，' + a[1] +')\n 人数：'+ a[2])
-							}
-						},
-						backgroundColor: '#ffffff',
-						visualMap: [{
-							min: 0,
-							max: 10,
-							inRange: {
-								color: ['#000000', '#0000FF', '#00ffff', '#00ff00', '#ffff00', '#ff0000']
-							},
-							text: ['>10', '1'],
-							textStyle: {
-								color: '#000',
-								fontSize:20
-							},
-							bottom: 50,
-							left:50
-						}],
-						bmap: {
-							center: [104.114129, 37.550339],
-							zoom: 5.5,
-							roam: true,
-							mapStyle: {
-								styleJson: [{
-									'featureType': 'water',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'land',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#f3f3f3'
-									}
-								}, {
-									'featureType': 'railway',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'highway',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#fdfdfd'
-									}
-								}, {
-									'featureType': 'highway',
-									'elementType': 'labels',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'geometry',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'geometry.fill',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'poi',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'green',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'subway',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'manmade',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'local',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'labels',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'boundary',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'building',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'label',
-									'elementType': 'labels.text.fill',
-									'stylers': {
-										'color': '#999999'
-									}
-								}]
-							}
-						},
-						series: [{
-							name: 'AI',
-							type: 'heatmap',
-							coordinateSystem: 'bmap',
-							data: geo3s
-						},
-						{
-							name: '人数',
-							type: 'scatter',
-							coordinateSystem: 'bmap',
-							data: geo3s,
-							symbolSize: function (a,b) {
-								var c = a[2];
-								if(c<4)
-									c/=0.2;
-								else if(c<20)
-									c=20;
-									
-								if(c>25)
-									c=25;
-								return c;
-							},
-							itemStyle: {
-								normal: {
-									color: '#00ff00'
-								}
-							}
-						}]
-					};
-					
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					
-					var geos2 = [];
-					var geocount2 = 0;
-					
-					//获取经纬度
-					for(var i = 0; i < sheets.length; i++){  
-						var geo2 = sheets[i].OriginGeo;
-						
-						if(geo2 != 'NULL') {
-							geos2.push(geo2);
-							geocount2++;
-						}							
-					}
-					
-					//分类
-					var geosbuffer2 = [];
-					geosbuffer2.push(geos2[0]);
-					var count2 = 1;
-					for(var i = 1; i < geocount2; i++)
-					{
-						var b = geos2[i];
-						
-						var flag = 0;
-						for(var j = 0;j<count2;j++)
-						{
-							if(b==geosbuffer2[j])
-							{
-								flag = 1;
-								break;
-							}
-						}
-						
-						if(flag != 1)
-						{
-							geosbuffer2.push(b);
-							count2++;
-						}
-					}
-					
-					//每类有几个
-					var geo3s2 = [];
-					for(var i=0;i<count2;i++)
-					{
-						var a = 0;
-						var geo32 = [];
-						for(var j=0;j<geocount2;j++)
-						{
-							if(geosbuffer2[i] == geos2[j])
-							{
-								a++;
-							}
-						}
-						
-						var b = geosbuffer2[i].split(",");
-						geo32.push(parseFloat(b[0]));
-						geo32.push(parseFloat(b[1]));
-						geo32.push(a);
-						
-						geo3s2.push(geo32);
-					}
-					
-					optionMap2 = {
-						title: {
-							text: '部分长江学者籍贯地区分布图',
-							subtext: 'Data from Team 10',
-							sublink: 'http://www.baidu.com',
-							left: 'center',
-						},
-						tooltip : {
-							trigger: 'item',
-							formatter: function (params) {
-								
-								var a = params.value.toString().split(",");
-								
-								return ('经纬度：(' + a[0] +'，' + a[1] +')\n 人数：'+ a[2])
-							}
-						},
-						backgroundColor: '#ffffff',
-						visualMap: [{
-							min: 0,
-							max: 10,
-							inRange: {
-								color: ['#000000', '#0000FF', '#00ffff', '#00ff00', '#ffff00', '#ff0000']
-							},
-							text: ['>10', '1'],
-							textStyle: {
-								color: '#000',
-								fontSize:20
-							},
-							bottom: 50,
-							left:50
-						}],
-						bmap: {
-							center: [104.114129, 37.550339],
-							zoom: 5.5,
-							roam: true,
-							mapStyle: {
-								styleJson: [{
-									'featureType': 'water',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'land',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#f3f3f3'
-									}
-								}, {
-									'featureType': 'railway',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'highway',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#fdfdfd'
-									}
-								}, {
-									'featureType': 'highway',
-									'elementType': 'labels',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'geometry',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'geometry.fill',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'poi',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'green',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'subway',
-									'elementType': 'all',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'manmade',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'local',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'arterial',
-									'elementType': 'labels',
-									'stylers': {
-										'visibility': 'off'
-									}
-								}, {
-									'featureType': 'boundary',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#fefefe'
-									}
-								}, {
-									'featureType': 'building',
-									'elementType': 'all',
-									'stylers': {
-										'color': '#d1d1d1'
-									}
-								}, {
-									'featureType': 'label',
-									'elementType': 'labels.text.fill',
-									'stylers': {
-										'color': '#999999'
-									}
-								}]
-							}
-						},
-						series: [{
-							name: 'AI',
-							type: 'heatmap',
-							coordinateSystem: 'bmap',
-							data: geo3s2
-						},
-						{
-							name: '人数',
-							type: 'scatter',
-							coordinateSystem: 'bmap',
-							data: geo3s2,
-							symbolSize: function (a,b) {
-								var c = a[2];
-								//if(c<10)
-								//	c=10;
-								if(c>4)
-									c=4;
-								return c/0.2;
-							},
-							itemStyle: {
-								normal: {
-									color: '#00ff00'
-								}
-							}
-						}]
-					};
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					
-					// 显示标题，图例
-					myChartMap2.setOption(optionMap2);
-					
-					myChartMap.setOption(optionMap);
-					myChartAgeLine.setOption(optionAgeLine);
-					myChartAgePie.setOption(optionAgePie);
-                };
-                
-                reader.readAsBinaryString(f);
-            }
-
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
-			
-			
-			
 			
 			var mapContainer2 = document.getElementById('map2');
-			
 			var mapContainer = document.getElementById('map');
+			
 			var linContainer = document.getElementById('ageLine');
 			var pieContainer = document.getElementById('agePie');
 			
-			//用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
+			// 用于使chart自适应高度和宽度,通过窗体高宽计算容器高宽
 			var resizeWorldMapContainer = function () {
 				mapContainer2.style.height = window.innerHeight+'px';
-			
 				mapContainer.style.height = window.innerHeight+'px';
 				linContainer.style.height = window.innerHeight+'px';
 				pieContainer.style.height = window.innerHeight+'px';
 			};
-			//设置容器高宽
+			// 设置容器高宽
 			resizeWorldMapContainer();
 			
-			// 年龄分布
+			// 地域分布
 			var myChartMap2 = echarts.init(mapContainer2);
-			
 			var myChartMap = echarts.init(mapContainer);
+			
+			// 年龄分布
 			var myChartAgeLine = echarts.init(linContainer);
 			var myChartAgePie = echarts.init(pieContainer);
 			
-			// 获取百度地图实例，使用百度地图自带的控件
-			//var bmap = myChart.getModel().getComponent('bmap').getBMap();
-			//bmap.addControl(new BMap.MapTypeControl());
-			
-			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
+			//曲线图数据准备
+			var date = [20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76];
+			var sum = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,2,0,2,2,5,8,4,9,5,17,22,20,23,34,26,42,49,48,66,55,25,21,28,14,32,14,11,14,5,4,0,1,0,1,1,2,0,1,2,1];
+			var hsum = [1,0,2,0,0,1,1,0,0,0,3,0,4,8,9,9,17,19,17,22,33,32,47,47,59,66,57,27,20,23,19,14,7,10,12,9,11,3,0,3,1,2,1,0,0,3,0,0,0,0,0,0,0,0,0,0,0];
+			
+			//for(var i=20;i<77;i++){
+			//	date.push(i);
+			//}
+			
+			//曲线图
+			var colors = ['#ff0000', '#0000ff', '#00ff00'];
+			optionAgeLine = {
+				color: colors,
+				title: {
+					text: '部分长江学者年龄与获奖年龄分布图',
+					subtext: 'Data from Team 10',
+					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
+					left: 'center'
+				},
+				tooltip: {
+					trigger: 'axis'
+				},
+				legend: {
+					x : 'center',
+					y : 'bottom',
+					data:['年龄人数' , '获奖年龄人数']
+				},
+				xAxis: {
+					name: '年龄（岁）',
+					type: 'category',
+					data: date
+				},
+				yAxis: {
+					name: '人数（位）',
+					type: 'value'
+				},
+				series: [{
+					name:'年龄人数',
+					data: sum,
+					type: 'line',
+					smooth: true
+				},
+				{
+					name:'获奖年龄人数',
+					data: hsum,
+					type: 'line',
+					smooth: true
+				}]
+			};
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			//饼图数据准备
 			var a1 = '≤40岁';
@@ -975,7 +194,7 @@
 				title : {
 					text: '部分长江学者年龄与获奖年龄比例图',
 					subtext: 'Data from Team 10',
-					sublink: 'http://www.baidu.com',
+					sublink: 'https://github.com/iamweixiaohang/CJSDatafromTeam10',
 					x: 'center'
 				},
 				tooltip : {
@@ -1082,6 +301,8 @@
 					]
 				}]
 			};
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			
 			//myChartAgeLine.setOption(optionAgeLine);
