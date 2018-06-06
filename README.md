@@ -8,6 +8,7 @@
 ### （1）成员
 
 组长：韦晓航
+
 组员：赵志伟，胡叔琦，管延伟，黄涛
 
 ### （2）分工
@@ -52,12 +53,15 @@
 ## 工作成果
 
 - 数据可视化分析与交互
+
   [网页展示](https://iamweixiaohang.github.io/CJSDatafromTeam10/) 
 
-- 数据集为本组搜集的数据（/data/第十组(18.5.8)V1.1.xlsx）
-    [/data/第十组(18.5.8)V1.1.xlsx](https://github.com/iamweixiaohang/CJSDatafromTeam10/blob/master/data/) 
+- 数据集为本组搜集的数据
+
+  [/data/第十组(18.5.8)V1.1.xlsx](https://github.com/iamweixiaohang/CJSDatafromTeam10/blob/master/data/) 
   
  - PPT与总结
+ 
    [/PPT/第十组.ppt](https://github.com/iamweixiaohang/CJSDatafromTeam10/blob/master/PPT/)
 
 ##   
