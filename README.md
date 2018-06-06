@@ -1,7 +1,9 @@
 
 ## 欢迎
 
-这是北京航空航天大学软件学院2018春季学期高性能计算第十组的大作业。
+- 这是北京航空航天大学软件学院2018春季学期高性能计算第十组的大作业。
+
+- 可视化结果与交互连接 https://iamweixiaohang.github.io/CJSDatafromTeam10/
 
 ### （1）成员
 
@@ -49,13 +51,16 @@
 
 ## 工作成果
 
-- 数据集为本组搜集的数据（/data/第十组(18.5.8)_V1.1.xlsx）。
-  连接 
+- 数据集为本组搜集的数据（/data/第十组(18.5.8)V1.1.xlsx）
+  连接  https://github.com/iamweixiaohang/CJSDatafromTeam10/blob/master/data/%E7%AC%AC%E5%8D%81%E7%BB%84(18.5.8)V1.1.xlsx
 
 - 数据可视化分析与交互
   连接 https://iamweixiaohang.github.io/CJSDatafromTeam10/
   
  - PPT与总结（/PPT/第十组.ppt）
+   连接 https://github.com/iamweixiaohang/CJSDatafromTeam10/blob/master/PPT/%E7%AC%AC%E5%8D%81%E7%BB%84.pptx
+
+##   
 
 ### 如果您本项目对您有帮助，方便的话点个赞（star），非常感谢。
 
