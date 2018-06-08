@@ -1,7 +1,9 @@
 
 ## 欢迎
 
-- 这是[北京航空航天大学软件学院](http://soft.buaa.edu.cn/)2018春季学期高性能计算第十组的大作业。
+- 这是[北京航空航天大学软件学院](http://soft.buaa.edu.cn/)2018春季学期高性能计算第十组的大作业
+
+——[长江学者(Chang Jiang Scholars，CJS)](http://cksp.eol.cn/)数据搜集与分析。
 
 - [可视化分析结果与交互连接](https://iamweixiaohang.github.io/CJSDatafromTeam10/)
 
